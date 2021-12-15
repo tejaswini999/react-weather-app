@@ -115,14 +115,22 @@ function App() {
           <h2>DAILY FORECAST</h2>
           <div className="daily-forecast">
             {weather.daily.map(i =>
-              <li key={i.dt}>
-                <div>{dateBuilder(getDateFromTimestamp(i.dt)).split(', ')[0]}</div>
-                <div>{dateBuilder(getDateFromTimestamp(i.dt)).split(', ')[1]}</div>
-                <img alt="" src={`http://openweathermap.org/img/wn/${i.weather[0].icon}@2x.png`} />
-                <div className="daily-min">Min {Math.round(i.temp.min)}°C</div>
-                <div className="daily-max">Max {Math.round(i.temp.max)}°C</div>
-                <div className="daily-weather">{i.weather[0].main}</div>
-              </li>
+              <div key={i.dt}>
+                {
+                  (dateBuilder(getDateFromTimestamp(i.dt)) !== dateBuilder(new Date())) ?
+                    (
+                      <li>
+                        <div>{dateBuilder(getDateFromTimestamp(i.dt)).split(', ')[0]}</div>
+                        <div>{dateBuilder(getDateFromTimestamp(i.dt)).split(', ')[1]}</div>
+                        <img alt="" src={`http://openweathermap.org/img/wn/${i.weather[0].icon}@2x.png`} />
+                        <div className="daily-min">Min {Math.round(i.temp.min)}°C</div>
+                        <div className="daily-max">Max {Math.round(i.temp.max)}°C</div>
+                        <div className="daily-weather">{i.weather[0].main}</div>
+                      </li>
+                    ) : ('')
+                }
+              </div>
+
             )}
           </div>
 
