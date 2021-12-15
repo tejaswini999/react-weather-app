@@ -117,9 +117,11 @@ function App() {
             {weather.daily.map(i =>
               <div key={i.dt}>
                 {
-                  (dateBuilder(getDateFromTimestamp(i.dt)) !== dateBuilder(new Date())) ?
+                  (new Date(getDateFromTimestamp(i.dt).getFullYear(), getDateFromTimestamp(i.dt).getMonth(), getDateFromTimestamp(i.dt).getDate()) > new Date()) ?
                     (
                       <li>
+                        {console.log(dateBuilder(getDateFromTimestamp(i.dt)))}
+                        {console.log(dateBuilder(new Date()))}
                         <div>{dateBuilder(getDateFromTimestamp(i.dt)).split(', ')[0]}</div>
                         <div>{dateBuilder(getDateFromTimestamp(i.dt)).split(', ')[1]}</div>
                         <img alt="" src={`http://openweathermap.org/img/wn/${i.weather[0].icon}@2x.png`} />
